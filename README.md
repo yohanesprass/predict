@@ -1,0 +1,2 @@
+# predict
+Magic Chess GoGo
