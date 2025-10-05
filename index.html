@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PREDIKTOR MCGG - RESPONSIVE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <img src="https://en.moonton.com/upload/image/20250424/fc521b1e58112669afa4daf46d34e130.png" alt="Logo MCGG" class="logo">
+    
+    <h1>PREDIKTOR MCGG - SEMUA PERANGKAT</h1>
+
+    <div class="pattern-explanation">
+      <p><b>🎯 POLA YANG DITEMUKAN:</b></p>
+      <p>"Lawan di Ronde I/II akan menjadi lawan <span class="highlight">DI DEPAN MEREKA</span> di Ronde III"</p>
+      <p><b>Pola berlanjut:</b> Ronde IV-VIII mengikuti pola yang sama dengan penyesuaian urutan lawan</p>
+    </div>
+
+    <div class="info-box">
+      <p><b>📋 CARA PENGGUNAAN:</b></p>
+      <p>1. Isi nama lawan yang sudah Anda hadapi dari <span class="highlight">I-2 sampai II-6</span></p>
+      <p>2. Klik tombol <span class="highlight">"Eliminasi"</span> untuk menandai lawan yang sudah tereliminasi</p>
+      <p>3. Sistem akan <span class="highlight">otomatis mengganti</span> player tereliminasi dengan player aktif berikutnya</p>
+      <p>4. Klik <span class="highlight">"Generate Semua Ronde"</span> untuk melihat prediksi semua ronde</p>
+    </div>
+
+    <div class="section-title">🔮 INPUT LAWAN YANG SUDAH DIHADAPI</div>
+    
+    <div class="player-inputs-grid">
+      <div class="player-input">
+        <input type="text" id="p2" placeholder="I-2 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p2')">Eliminasi</button>
+      </div>
+      <div class="player-input">
+        <input type="text" id="p3" placeholder="I-3 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p3')">Eliminasi</button>
+      </div>
+      <div class="player-input">
+        <input type="text" id="p4" placeholder="I-4 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p4')">Eliminasi</button>
+      </div>
+      <div class="player-input">
+        <input type="text" id="p5" placeholder="II-1 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p5')">Eliminasi</button>
+      </div>
+      <div class="player-input">
+        <input type="text" id="p6" placeholder="II-2 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p6')">Eliminasi</button>
+      </div>
+      <div class="player-input">
+        <input type="text" id="p7" placeholder="II-4 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p7')">Eliminasi</button>
+      </div>
+      <div class="player-input">
+        <input type="text" id="p8" placeholder="II-5 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p8')">Eliminasi</button>
+      </div>
+      <div class="player-input">
+        <input type="text" id="p9" placeholder="II-6 (Contoh: Nama Player)">
+        <button class="eliminate-btn" onclick="toggleElimination('p9')">Eliminasi</button>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button class="primary-btn" onclick="generateAllRoundsPrediction()">
+        <span>⚔️</span> Generate Semua Ronde
+      </button>
+      <button class="reset-btn" onclick="resetAll()">
+        <span>🔄</span> Reset Semua
+      </button>
+    </div>
+
+    <div id="eliminated-section" class="eliminated-section" style="display: none;">
+      <p><b>🚫 PLAYER YANG SUDAH TERELIMINASI:</b></p>
+      <div id="eliminated-list" class="eliminated-list"></div>
+    </div>
+
+    <div id="jadwal"></div>
+  </div>
+
+  <a href="https://www.instagram.com/yohanes.prass/" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1000px-Instagram_logo_2022.svg.png" alt="TikTok" class="tiktok-logo">
+  </a>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
