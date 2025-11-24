@@ -3,70 +3,492 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PREDIKTOR MCGG - RESPONSIVE</title>
+  <title>PREDIKTOR MCGG - POLA MIRROR</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* Reset dan Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #00ffcc;
+      --secondary-color: #ffd700;
+      --danger-color: #ff6b6b;
+      --bg-dark: #1e1e2f;
+      --bg-darker: #2a2a40;
+      --bg-card: #2f2f45;
+      --text-light: #f0f0f0;
+      --text-dark: #1e1e2f;
+      --border-radius: 8px;
+      --shadow: 0 4px 15px rgba(0,0,0,0.3);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--bg-dark), var(--bg-darker));
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Typography Responsive */
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 700;
+    }
+
+    h2 {
+      margin-top: 25px;
+      color: var(--secondary-color);
+      font-size: clamp(16px, 3.5vw, 20px);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      color: var(--secondary-color);
+      margin-top: 20px;
+      font-size: clamp(14px, 3vw, 18px);
+      font-weight: 600;
+    }
+
+    /* Layout Responsive */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    .logo {
+      width: min(200px, 40vw);
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    /* Input Section Responsive */
+    .player-inputs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .player-input {
+      display: flex;
+      align-items: center;
+      background: var(--bg-card);
+      padding: 12px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .player-input input {
+      flex: 1;
+      margin-right: 10px;
+      padding: 10px 12px;
+      border-radius: var(--border-radius);
+      border: none;
+      background: #3a3a5a;
+      color: var(--text-light);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .player-input input:focus {
+      outline: 2px solid var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .player-input input::placeholder {
+      color: #a0a0a0;
+    }
+
+    /* Button Styles Responsive */
+    .button-container {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 25px 0;
+    }
+
+    button {
+      padding: clamp(10px, 3vw, 14px) clamp(16px, 4vw, 24px);
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: clamp(12px, 2.5vw, 14px);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 120px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .primary-btn {
+      background: var(--primary-color);
+      color: var(--text-dark);
+    }
+
+    .primary-btn:hover {
+      background: #00e6b8;
+    }
+
+    .reset-btn {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    .reset-btn:hover {
+      background: #e63b3b;
+    }
+
+    .eliminate-btn {
+      background: var(--danger-color);
+      color: white;
+      padding: 8px 12px;
+      font-size: 12px;
+      min-width: 80px;
+      white-space: nowrap;
+    }
+
+    /* Table Responsive */
+    .table-container {
+      overflow-x: auto;
+      margin: 15px 0;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      min-width: 500px;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      font-size: clamp(12px, 2.5vw, 14px);
+    }
+
+    th {
+      background: var(--primary-color);
+      color: var(--text-dark);
+      padding: clamp(10px, 2.5vw, 14px);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    td {
+      border: 1px solid #444;
+      padding: clamp(8px, 2vw, 12px);
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    /* Card Components */
+    .info-box, .pattern-explanation, .accuracy-note, .eliminated-section, .summary-box {
+      padding: clamp(12px, 3vw, 20px);
+      border-radius: var(--border-radius);
+      margin: 15px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .info-box {
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid var(--secondary-color);
+    }
+
+    .pattern-explanation {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--danger-color);
+    }
+
+    .accuracy-note {
+      background: rgba(0, 255, 204, 0.1);
+      border: 1px solid var(--primary-color);
+      text-align: center;
+    }
+
+    .eliminated-section {
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid var(--danger-color);
+    }
+
+    .summary-box {
+      background: rgba(0, 255, 204, 0.1);
+      border: 1px solid var(--primary-color);
+    }
+
+    /* Round Container */
+    .round-container {
+      margin-bottom: 30px;
+      background: var(--bg-card);
+      border-radius: var(--border-radius);
+      padding: clamp(15px, 3vw, 20px);
+      border: 1px solid #444;
+      box-shadow: var(--shadow);
+    }
+
+    /* Status Badges */
+    .status-badge {
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .status-active {
+      background: var(--primary-color);
+      color: var(--text-dark);
+    }
+
+    .status-replacement {
+      background: var(--secondary-color);
+      color: var(--text-dark);
+    }
+
+    .status-eliminated {
+      background: var(--danger-color);
+      color: white;
+    }
+
+    .status-mirror {
+      background: #9b59b6;
+      color: white;
+    }
+
+    /* Eliminated Players List */
+    .eliminated-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .eliminated-player {
+      background: rgba(255, 107, 107, 0.3);
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .eliminated-player:hover {
+      background: rgba(255, 107, 107, 0.5);
+      transform: scale(1.05);
+    }
+
+    /* Text Utilities */
+    .highlight {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .eliminated {
+      text-decoration: line-through;
+      color: var(--danger-color) !important;
+      opacity: 0.7;
+    }
+
+    .replacement {
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+
+    .mirror {
+      color: #9b59b6;
+      font-weight: 600;
+    }
+
+    /* TikTok Logo */
+    .tiktok-logo {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: clamp(40px, 8vw, 50px);
+      cursor: pointer;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    .tiktok-logo:hover {
+      transform: scale(1.1);
+    }
+
+    /* Mobile First Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+        font-size: 13px;
+      }
+
+      .player-inputs-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .player-input {
+        padding: 10px;
+      }
+
+      .button-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      button {
+        width: 100%;
+        min-width: auto;
+      }
+
+      .table-container {
+        margin: 10px -5px;
+      }
+
+      table {
+        min-width: 400px;
+      }
+
+      th, td {
+        padding: 8px 6px;
+      }
+
+      .round-container {
+        margin-bottom: 20px;
+        padding: 12px;
+      }
+
+      .tiktok-logo {
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 8px;
+      }
+
+      .player-input {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .player-input input {
+        margin-right: 0;
+        width: 100%;
+      }
+
+      .eliminate-btn {
+        width: 100%;
+      }
+
+      table {
+        min-width: 350px;
+        font-size: 11px;
+      }
+
+      th, td {
+        padding: 6px 4px;
+      }
+
+      .status-badge {
+        font-size: 10px;
+        padding: 3px 6px;
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+    }
+
+    /* Animation untuk interaksi */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .round-container {
+      animation: fadeIn 0.5s ease-out;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <img src="https://en.moonton.com/upload/image/20250424/fc521b1e58112669afa4daf46d34e130.png" alt="Logo MCGG" class="logo">
+    <img src="https://i.postimg.cc/fyykD3q6/prediktor.png" alt="Logo MCGG" class="logo">
     
-    <h1>PREDIKTOR MCGG - SEMUA PERANGKAT</h1>
+    <h1>PREDIKTOR MCGG - SISTEM MIRROR</h1>
 
     <div class="pattern-explanation">
-      <p><b>🎯 POLA YANG DITEMUKAN:</b></p>
-      <p>"Lawan di Ronde I/II akan menjadi lawan <span class="highlight">DI DEPAN MEREKA</span> di Ronde III"</p>
-      <p><b>Pola berlanjut:</b> Ronde IV-VIII mengikuti pola yang sama dengan penyesuaian urutan lawan</p>
+      <p><b>🎯 POLA MIRROR BARU:</b></p>
+      <p>• Ronde III-VIII: 6 Match (Step 3 = Creep)</p>
+      <p>• Player tereliminasi diganti dengan <span class="mirror">MIRROR</span> sesuai urutan</p>
+      <p>• Sistem mirror menjaga keseimbangan matchmaking</p>
     </div>
 
     <div class="info-box">
       <p><b>📋 CARA PENGGUNAAN:</b></p>
-      <p>1. Isi nama lawan yang sudah Anda hadapi dari <span class="highlight">I-2 sampai II-6</span></p>
+      <p>1. Isi nama lawan yang sudah Anda hadapi dari <span class="highlight">I-2 sampai II-5</span></p>
       <p>2. Klik tombol <span class="highlight">"Eliminasi"</span> untuk menandai lawan yang sudah tereliminasi</p>
-      <p>3. Sistem akan <span class="highlight">otomatis mengganti</span> player tereliminasi dengan player aktif berikutnya</p>
-      <p>4. Klik <span class="highlight">"Generate Semua Ronde"</span> untuk melihat prediksi semua ronde</p>
+      <p>3. Sistem akan <span class="highlight">otomatis mengganti</span> dengan mirror player</p>
+      <p>4. Klik <span class="highlight">"Generate Prediksi"</span> untuk melihat prediksi</p>
     </div>
 
     <div class="section-title">🔮 INPUT LAWAN YANG SUDAH DIHADAPI</div>
     
     <div class="player-inputs-grid">
       <div class="player-input">
-        <input type="text" id="p2" placeholder="I-2 (Contoh: Nama Player)">
+        <input type="text" id="p2" placeholder="I-2 (Contoh: Player 1)">
         <button class="eliminate-btn" onclick="toggleElimination('p2')">Eliminasi</button>
       </div>
       <div class="player-input">
-        <input type="text" id="p3" placeholder="I-3 (Contoh: Nama Player)">
+        <input type="text" id="p3" placeholder="I-3 (Contoh: Player 2)">
         <button class="eliminate-btn" onclick="toggleElimination('p3')">Eliminasi</button>
       </div>
       <div class="player-input">
-        <input type="text" id="p4" placeholder="I-4 (Contoh: Nama Player)">
+        <input type="text" id="p4" placeholder="I-4 (Contoh: Player 3)">
         <button class="eliminate-btn" onclick="toggleElimination('p4')">Eliminasi</button>
       </div>
       <div class="player-input">
-        <input type="text" id="p5" placeholder="II-1 (Contoh: Nama Player)">
+        <input type="text" id="p5" placeholder="II-1 (Contoh: Player 4)">
         <button class="eliminate-btn" onclick="toggleElimination('p5')">Eliminasi</button>
       </div>
       <div class="player-input">
-        <input type="text" id="p6" placeholder="II-2 (Contoh: Nama Player)">
+        <input type="text" id="p6" placeholder="II-2 (Contoh: Player 5)">
         <button class="eliminate-btn" onclick="toggleElimination('p6')">Eliminasi</button>
       </div>
       <div class="player-input">
-        <input type="text" id="p7" placeholder="II-4 (Contoh: Nama Player)">
+        <input type="text" id="p7" placeholder="II-4 (Contoh: Player 6)">
         <button class="eliminate-btn" onclick="toggleElimination('p7')">Eliminasi</button>
       </div>
       <div class="player-input">
-        <input type="text" id="p8" placeholder="II-5 (Contoh: Nama Player)">
+        <input type="text" id="p8" placeholder="II-5 (Contoh: Player 7)">
         <button class="eliminate-btn" onclick="toggleElimination('p8')">Eliminasi</button>
-      </div>
-      <div class="player-input">
-        <input type="text" id="p9" placeholder="II-6 (Contoh: Nama Player)">
-        <button class="eliminate-btn" onclick="toggleElimination('p9')">Eliminasi</button>
       </div>
     </div>
 
     <div class="button-container">
       <button class="primary-btn" onclick="generateAllRoundsPrediction()">
-        <span>⚔️</span> Generate Semua Ronde
+        <span>⚔️</span> Generate Prediksi
       </button>
       <button class="reset-btn" onclick="resetAll()">
         <span>🔄</span> Reset Semua
@@ -81,10 +503,377 @@
     <div id="jadwal"></div>
   </div>
 
-  <a href="https://www.instagram.com/yohanes.prass/" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1000px-Instagram_logo_2022.svg.png" alt="TikTok" class="tiktok-logo">
+   <a href="https://www.instagram.com/yohanes.prass/" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/1000px-Instagram_logo_2022.svg.png" alt="Instagram" class="tiktok-logo">
   </a>
 
-  <script src="assets/js/script.js"></script>
+  <script>
+    let eliminatedPlayers = new Set();
+
+    function toggleElimination(inputId) {
+      const input = document.getElementById(inputId);
+      const playerName = input.value.trim();
+      
+      if (!playerName) {
+        alert('Harap isi nama player terlebih dahulu!');
+        return;
+      }
+
+      if (eliminatedPlayers.has(playerName)) {
+        eliminatedPlayers.delete(playerName);
+        input.classList.remove('eliminated');
+        updateEliminatedList();
+        showNotification(`🔄 ${playerName} dikembalikan ke permainan`);
+      } else {
+        eliminatedPlayers.add(playerName);
+        input.classList.add('eliminated');
+        updateEliminatedList();
+        showNotification(`🚫 ${playerName} ditandai sebagai tereliminasi`);
+      }
+      
+      if (areAllInputsFilled()) {
+        generateAllRoundsPrediction();
+      }
+    }
+
+    function areAllInputsFilled() {
+      const fields = ["p2","p3","p4","p5","p6","p7","p8"];
+      return fields.every(id => document.getElementById(id).value.trim());
+    }
+
+    function updateEliminatedList() {
+      const eliminatedSection = document.getElementById('eliminated-section');
+      const eliminatedList = document.getElementById('eliminated-list');
+      
+      if (eliminatedPlayers.size > 0) {
+        eliminatedSection.style.display = 'block';
+        eliminatedList.innerHTML = '';
+        eliminatedPlayers.forEach(player => {
+          const span = document.createElement('span');
+          span.className = 'eliminated-player';
+          span.textContent = player;
+          span.onclick = () => {
+            eliminatedPlayers.delete(player);
+            document.querySelectorAll('input').forEach(input => {
+              if (input.value.trim() === player) {
+                input.classList.remove('eliminated');
+              }
+            });
+            updateEliminatedList();
+            if (areAllInputsFilled()) {
+              generateAllRoundsPrediction();
+            }
+          };
+          eliminatedList.appendChild(span);
+        });
+      } else {
+        eliminatedSection.style.display = 'none';
+      }
+    }
+
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        color: var(--text-dark);
+        padding: 12px 16px;
+        border-radius: var(--border-radius);
+        z-index: 1000;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+        animation: fadeIn 0.3s ease;
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        document.body.removeChild(notification);
+      }, 2000);
+    }
+
+    function generateAllRoundsPrediction() {
+      const fields = ["p2","p3","p4","p5","p6","p7","p8"];
+      let allFilled = true;
+
+      for (let id of fields) {
+        if (!document.getElementById(id).value.trim()) {
+          allFilled = false;
+          break;
+        }
+      }
+
+      if (!allFilled) {
+        alert("⚠️ Harap isi semua kolom lawan (I-2 sampai II-5) sebelum generate prediksi! ⚠️");
+        document.getElementById("jadwal").innerHTML = "";
+        return;
+      }
+
+      const originalOpponents = {
+        "I2": document.getElementById("p2").value.trim(),
+        "I3": document.getElementById("p3").value.trim(),
+        "I4": document.getElementById("p4").value.trim(),
+        "II1": document.getElementById("p5").value.trim(),
+        "II2": document.getElementById("p6").value.trim(),
+        "II4": document.getElementById("p7").value.trim(),
+        "II5": document.getElementById("p8").value.trim()
+      };
+
+      const allPredictions = calculateAllRoundsPredictions(originalOpponents);
+      
+      let html = '';
+      
+      html += `<div class="accuracy-note">
+        <b>🎯 PREDIKSI DENGAN SISTEM MIRROR</b><br>
+        ${eliminatedPlayers.size > 0 ? 
+          `🚫 ${eliminatedPlayers.size} player tereliminasi - Diganti dengan MIRROR` : 
+          'Semua player masih aktif'}
+      </div>`;
+
+      // Tampilkan ronde III-VIII
+      const rounds = ['III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+      
+      rounds.forEach(round => {
+        const predictions = allPredictions[round];
+        
+        html += `<div class="round-container">`;
+        html += `<h2>🎮 RONDE ${round} (6 Match)</h2>`;
+        html += `<div class="table-container">`;
+        html += `<table><tr><th>Step</th><th>Lawan</th><th>Status</th><th>Keterangan</th></tr>`;
+        
+        predictions.forEach(pred => {
+          let statusClass = 'status-active';
+          let statusText = '🎯 Aktif';
+          
+          if (pred.opponent === 'Creep') {
+            statusClass = 'status-active';
+            statusText = '👾 Creep';
+          } else if (pred.isMirror) {
+            statusClass = 'status-mirror';
+            statusText = '🪞 Mirror';
+          }
+          
+          html += `<tr>
+            <td>${pred.step}</td>
+            <td><b>${pred.opponent}</b></td>
+            <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+            <td>${pred.pattern}${pred.isMirror ? `<br><small class="eliminated">(mirror ${pred.originalPlayer})</small>` : ''}</td>
+          </tr>`;
+        });
+        html += `</table></div></div>`;
+      });
+
+      // Summary mirror replacements
+      if (allPredictions.mirrorReplacements.length > 0) {
+        html += `<div class="summary-box">`;
+        html += `<p><b>🪞 RINGKASAN MIRROR REPLACEMENT:</b></p>`;
+        
+        allPredictions.mirrorReplacements.forEach(mirror => {
+          html += `<p><span class="eliminated">${mirror.original}</span> → <span class="mirror">${mirror.mirror}</span> (${mirror.positions.join(', ')})</p>`;
+        });
+        
+        html += `<p><b>Total:</b> ${allPredictions.mirrorReplacements.length} player diganti dengan mirror</p>`;
+        html += `</div>`;
+      }
+
+      // Strategi berdasarkan eliminasi
+      if (eliminatedPlayers.size > 0) {
+        const activePlayers = Object.values(originalOpponents)
+          .filter(player => !eliminatedPlayers.has(player));
+        
+        html += `<div class="info-box">`;
+        html += `<p><b>💡 STRATEGI BERDASARKAN MIRROR:</b></p>`;
+        html += `<p>• <span class="highlight">${eliminatedPlayers.size} player tereliminasi</span></p>`;
+        html += `<p>• Sistem menggunakan <span class="mirror">MIRROR</span> untuk menjaga keseimbangan</p>`;
+        html += `<p>• Fokus pada pola asli untuk antisipasi strategi lawan</p>`;
+        html += `</div>`;
+      }
+
+      document.getElementById("jadwal").innerHTML = html;
+    }
+
+    function calculateAllRoundsPredictions(originalOpponents) {
+      const activePlayers = Object.values(originalOpponents)
+        .filter(player => !eliminatedPlayers.has(player));
+      
+      const mirrorReplacements = [];
+      
+      // Fungsi untuk mendapatkan mirror player
+      function getMirrorPlayer(originalPlayer, position) {
+        if (!eliminatedPlayers.has(originalPlayer)) {
+          return { 
+            opponent: originalPlayer, 
+            isMirror: false,
+            originalPlayer: originalPlayer
+          };
+        }
+        
+        // Cari mirror berdasarkan urutan (opposite position)
+        const playerSequence = [
+          originalOpponents.I2, originalOpponents.I3, originalOpponents.I4,
+          originalOpponents.II1, originalOpponents.II2, originalOpponents.II4, originalOpponents.II5
+        ];
+        
+        const originalIndex = playerSequence.indexOf(originalPlayer);
+        let mirrorIndex;
+        
+        if (originalIndex !== -1) {
+          // Mirror logic: opposite position dalam sequence
+          mirrorIndex = (playerSequence.length - 1 - originalIndex) % playerSequence.length;
+        } else {
+          // Fallback: gunakan pertama dari active players
+          mirrorIndex = 0;
+        }
+        
+        const mirrorPlayer = activePlayers[mirrorIndex % activePlayers.length] || "Tidak ada player aktif";
+        
+        // Track mirror replacements
+        const existingMirror = mirrorReplacements.find(m => m.original === originalPlayer);
+        if (existingMirror) {
+          existingMirror.positions.push(position);
+        } else {
+          mirrorReplacements.push({
+            original: originalPlayer,
+            mirror: mirrorPlayer,
+            positions: [position]
+          });
+        }
+        
+        return { 
+          opponent: mirrorPlayer, 
+          isMirror: true,
+          originalPlayer: originalPlayer
+        };
+      }
+
+      // POLA BARU: Ronde III-VIII dengan 6 Match (Step 3 = Creep)
+      const playerSequence = [
+        originalOpponents.I2,  // 0
+        originalOpponents.I3,  // 1
+        originalOpponents.I4,  // 2
+        originalOpponents.II1, // 3
+        originalOpponents.II2, // 4
+        originalOpponents.II4, // 5
+        originalOpponents.II5  // 6
+      ];
+
+      // Fungsi untuk mendapatkan player berdasarkan urutan
+      function getPlayerBySequence(index) {
+        return playerSequence[index % playerSequence.length];
+      }
+
+      // RONDE III (6 Match)
+      const basePatternIII = [
+        { step: 'III-1', original: getPlayerBySequence(1), pattern: `Urutan ke-2 (I-3)` },
+        { step: 'III-2', original: getPlayerBySequence(2), pattern: `Urutan ke-3 (I-4)` },
+        { step: 'III-3', original: 'Creep', pattern: 'PvE Stage' },
+        { step: 'III-4', original: getPlayerBySequence(3), pattern: `Urutan ke-4 (II-1)` },
+        { step: 'III-5', original: getPlayerBySequence(4), pattern: `Urutan ke-5 (II-2)` },
+        { step: 'III-6', original: getPlayerBySequence(5), pattern: `Urutan ke-6 (II-4)` }
+      ];
+
+      // RONDE IV (6 Match)
+      const basePatternIV = [
+        { step: 'IV-1', original: getPlayerBySequence(6), pattern: `Urutan ke-7 (II-5)` },
+        { step: 'IV-2', original: getPlayerBySequence(0), pattern: `Urutan ke-1 (I-2)` },
+        { step: 'IV-3', original: 'Creep', pattern: 'PvE Stage' },
+        { step: 'IV-4', original: getPlayerBySequence(1), pattern: `Urutan ke-2 (I-3)` },
+        { step: 'IV-5', original: getPlayerBySequence(2), pattern: `Urutan ke-3 (I-4)` },
+        { step: 'IV-6', original: getPlayerBySequence(3), pattern: `Urutan ke-4 (II-1)` }
+      ];
+
+      // RONDE V (6 Match)
+      const basePatternV = [
+        { step: 'V-1', original: getPlayerBySequence(4), pattern: `Urutan ke-5 (II-2)` },
+        { step: 'V-2', original: getPlayerBySequence(5), pattern: `Urutan ke-6 (II-4)` },
+        { step: 'V-3', original: 'Creep', pattern: 'PvE Stage' },
+        { step: 'V-4', original: getPlayerBySequence(6), pattern: `Urutan ke-7 (II-5)` },
+        { step: 'V-5', original: getPlayerBySequence(0), pattern: `Urutan ke-1 (I-2)` },
+        { step: 'V-6', original: getPlayerBySequence(1), pattern: `Urutan ke-2 (I-3)` }
+      ];
+
+      // RONDE VI (6 Match)
+      const basePatternVI = [
+        { step: 'VI-1', original: getPlayerBySequence(2), pattern: `Urutan ke-3 (I-4)` },
+        { step: 'VI-2', original: getPlayerBySequence(3), pattern: `Urutan ke-4 (II-1)` },
+        { step: 'VI-3', original: 'Creep', pattern: 'PvE Stage' },
+        { step: 'VI-4', original: getPlayerBySequence(4), pattern: `Urutan ke-5 (II-2)` },
+        { step: 'VI-5', original: getPlayerBySequence(5), pattern: `Urutan ke-6 (II-4)` },
+        { step: 'VI-6', original: getPlayerBySequence(6), pattern: `Urutan ke-7 (II-5)` }
+      ];
+
+      // RONDE VII (6 Match)
+      const basePatternVII = [
+        { step: 'VII-1', original: getPlayerBySequence(0), pattern: `Urutan ke-1 (I-2)` },
+        { step: 'VII-2', original: getPlayerBySequence(1), pattern: `Urutan ke-2 (I-3)` },
+        { step: 'VII-3', original: 'Creep', pattern: 'PvE Stage' },
+        { step: 'VII-4', original: getPlayerBySequence(2), pattern: `Urutan ke-3 (I-4)` },
+        { step: 'VII-5', original: getPlayerBySequence(3), pattern: `Urutan ke-4 (II-1)` },
+        { step: 'VII-6', original: getPlayerBySequence(4), pattern: `Urutan ke-5 (II-2)` }
+      ];
+
+      // RONDE VIII (6 Match)
+      const basePatternVIII = [
+        { step: 'VIII-1', original: getPlayerBySequence(5), pattern: `Urutan ke-6 (II-4)` },
+        { step: 'VIII-2', original: getPlayerBySequence(6), pattern: `Urutan ke-7 (II-5)` },
+        { step: 'VIII-3', original: 'Creep', pattern: 'PvE Stage' },
+        { step: 'VIII-4', original: getPlayerBySequence(0), pattern: `Urutan ke-1 (I-2)` },
+        { step: 'VIII-5', original: getPlayerBySequence(1), pattern: `Urutan ke-2 (I-3)` },
+        { step: 'VIII-6', original: getPlayerBySequence(2), pattern: `Urutan ke-3 (I-4)` }
+      ];
+
+      // Fungsi untuk membuat prediksi dengan mirror system
+      function createPredictions(basePattern, roundName) {
+        return basePattern.map(item => {
+          if (item.original === 'Creep') {
+            return { 
+              step: item.step, 
+              opponent: 'Creep', 
+              isMirror: false, 
+              pattern: item.pattern 
+            };
+          }
+          
+          const mirror = getMirrorPlayer(item.original, `${roundName}-${item.step}`);
+          return {
+            step: item.step,
+            opponent: mirror.opponent,
+            isMirror: mirror.isMirror,
+            pattern: item.pattern,
+            originalPlayer: mirror.originalPlayer
+          };
+        });
+      }
+
+      return {
+        III: createPredictions(basePatternIII, 'III'),
+        IV: createPredictions(basePatternIV, 'IV'),
+        V: createPredictions(basePatternV, 'V'),
+        VI: createPredictions(basePatternVI, 'VI'),
+        VII: createPredictions(basePatternVII, 'VII'),
+        VIII: createPredictions(basePatternVIII, 'VIII'),
+        mirrorReplacements: mirrorReplacements
+      };
+    }
+
+    function resetAll() {
+      if (confirm("Yakin ingin mereset semua input dan eliminasi?")) {
+        const inputs = document.querySelectorAll("input[type='text']");
+        inputs.forEach(input => {
+          input.value = "";
+          input.classList.remove('eliminated');
+        });
+        eliminatedPlayers.clear();
+        updateEliminatedList();
+        document.getElementById("jadwal").innerHTML = "";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('p2').focus();
+    });
+  </script>
 </body>
 </html>
