@@ -169,7 +169,6 @@ Website prediksi lawan untuk game Magic Chess Mobile Legends dengan sistem elimi
 | II-2 | `Player5` |
 | II-4 | `Player6` |
 | II-5 | `Player7` |
-| II-6 | `Player1` |
 
 ### 🎯 Prediksi Hasil (Ronde III)
 
@@ -181,7 +180,6 @@ Website prediksi lawan untuk game Magic Chess Mobile Legends dengan sistem elimi
 | III-4 | `Player4` | 🎯 Aktif | Dari II-1 |
 | III-5 | `Player5` | 🎯 Aktif | Dari II-2 |
 | III-6 | `Player6` | 🎯 Aktif | Dari II-4 |
-| III-7 | `Player7` | 🎯 Aktif | Dari II-5 |
 
 ## 🛠️ Troubleshooting
 
